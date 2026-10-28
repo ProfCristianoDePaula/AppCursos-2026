@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AppCursos.Models;
 using AppCursos.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 public class TurmasController : Controller
 {
@@ -14,9 +15,10 @@ public class TurmasController : Controller
     }
 
     // GET: TURMAS
-    public async Task<IActionResult> Index()    
+    public async Task<IActionResult> Index()
     {
-        return View(await _context.Turmas.ToListAsync());
+        var listaTurmas = await _context.Turmas.Include(t => t.Curso).Include(t => t.Professor).ToListAsync();
+        return View(listaTurmas);
     }
 
     // GET: TURMAS/Details/5
@@ -40,6 +42,11 @@ public class TurmasController : Controller
     // GET: TURMAS/Create
     public IActionResult Create()
     {
+        // Enviar SelectList de Cursos
+        ViewBag.CursoId = new SelectList(_context.Cursos, "Id", "Nome");
+        // Enviar SelectList de Professores
+        ViewBag.ProfessorId = new SelectList(_context.Professores, "Id", "Nome");
+
         return View();
     }
 
@@ -56,6 +63,13 @@ public class TurmasController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        // Enviar SelectList de Cursos com a opção selecionada 
+        ViewBag.CursoId = new SelectList(_context.Cursos, "Id", "Nome", turma.CursoId);
+
+        // Enviar SelectList de Professores com a opção selecionada
+        ViewBag.ProfessorId = new SelectList(_context.Professores, "Id", "Nome", turma.ProfessorId);
+
         return View(turma);
     }
 
