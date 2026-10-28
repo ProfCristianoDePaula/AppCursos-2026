@@ -48,7 +48,7 @@ public class TurmasController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,Nome,CursoId,Curso")] Turma turma)
+    public async Task<IActionResult> Create([Bind("Id,Nome,CursoId,Curso,ProfessorId,Professor")] Turma turma)
     {
         if (ModelState.IsValid)
         {
@@ -80,7 +80,7 @@ public class TurmasController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int? id, [Bind("Id,Nome,CursoId,Curso")] Turma turma)
+    public async Task<IActionResult> Edit(int? id, [Bind("Id,Nome,CursoId,Curso,ProfessorId,Professor")] Turma turma)
     {
         if (id != turma.Id)
         {
