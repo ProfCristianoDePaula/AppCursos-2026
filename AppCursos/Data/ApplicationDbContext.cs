@@ -12,6 +12,7 @@ namespace AppCursos.Data
         public DbSet<Turma> Turmas { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<AlunoTurma> AlunoTurmas { get; set; }
+        public DbSet<Professor> Professores { get; set; }
 
     }
 }

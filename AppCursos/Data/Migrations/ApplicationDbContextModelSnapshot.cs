@@ -97,6 +97,30 @@ namespace AppCursos.Data.Migrations
                     b.ToTable("Cursos");
                 });
 
+            modelBuilder.Entity("AppCursos.Models.Professor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Salario")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Professores");
+                });
+
             modelBuilder.Entity("AppCursos.Models.Turma", b =>
                 {
                     b.Property<int>("Id")
