@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AppCursos.Data
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext(options)
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
     {
 
         // Incluir DbSet para cada entidade do modelo
