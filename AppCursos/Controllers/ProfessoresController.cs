@@ -48,10 +48,11 @@ public class ProfessoresController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,Nome,Email,Salario")] Professor professor)
+    public async Task<IActionResult> Create([Bind("Nome,Email,Salario")] Professor professor)
     {
         if (ModelState.IsValid)
         {
+            professor.Id = 0;
             _context.Add(professor);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
